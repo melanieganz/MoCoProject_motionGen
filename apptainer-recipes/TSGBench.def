@@ -21,7 +21,6 @@ From: debian:buster-slim
     git clone https://github.com/YihaoAng/TSGBench.git /TSGBench
 
     python3.7 -m venv /venv
-    ls /venv
     . /venv/bin/activate
     pip install --upgrade pip
     pip install \
