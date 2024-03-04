@@ -12,3 +12,5 @@
 - Get TSGBench to work
 - Extract real data curves
 - Upload data to the cluster
+- Revisit GenLive
+- Create one-page abstract draft
