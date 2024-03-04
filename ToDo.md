@@ -4,3 +4,11 @@
 - Get TSGBench (https://github.com/YihaoAng/TSGBench) to work with some of our own generated data
 - Create contained environment (apptainer) for one of the model (any) - apptainer recipe - can be tried locally first
 - Get the environment/containers runnning on the cluster
+
+2024-03-04
+- Get TSGBench (https://github.com/YihaoAng/TSGBench) to work with some of our own generated data
+- Get the environment/containers runnning on the cluster
+- Get at least one model working on the cluster
+- Get TSGBench to work
+- Extract real data curves
+- Upload data to the cluster
