@@ -1,0 +1,51 @@
+Bootstrap: docker
+From: debian:bookworm-slim
+
+%post
+
+    export LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+    apt-get update -q && \
+    apt-get install -q -y --no-install-recommends \
+        ca-certificates \
+        git \
+        wget &&
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+    # Download miniconda3
+    CONDA_VERSION=py311_23.11.0-2
+    wget https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
+
+    # Install miniconda3
+    bash miniconda.sh -b -p /opt/conda && \
+    rm miniconda.sh && \
+    find /opt/conda/ -follow -type f -name '*.a' -delete && \
+    find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
+    /opt/conda/bin/conda clean -afy && \
+    . /opt/conda/etc/profile.d/conda.sh && \
+    export PATH=$PATH:/opt/conda/bin && \
+    conda update -n base -c defaults conda
+
+    git clone https://github.com/jsyoon0823/TimeGAN.git /TimeGAN
+
+    conda create -n venv python=3.7
+    conda activate venv
+
+    pip install numpy>=1.17.2
+    pip install tensorflow==1.15.0
+    pip install tqdm>=4.36.1
+    pip install argparse>=1.1
+    pip install pandas>=0.25.1
+    pip install scikit-learn>=0.21.3
+    pip install matplotlib>=3.1.1
+    pip install protobuf==3.20.3
+
+
+%environment
+
+    export LANG=C.UTF-8 LC_ALL=C.UTF-8
+    
+    # Activate conda
+    . /opt/conda/etc/profile.d/conda.sh
+    conda activate venv
