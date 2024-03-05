@@ -38,7 +38,8 @@ From: debian:buster-slim
         statsmodels==0.13.2 \
         tensorflow==1.15.5 \
         torch==1.10.1 \
-        tslearn==0.6.1
+        tslearn==0.6.1 \
+        protobuf==3.20.3
 
 %environment
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
