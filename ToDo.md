@@ -6,9 +6,9 @@
 - Get the environment/containers runnning on the cluster (done)
 
 2024-03-04
-- Get TSGBench (https://github.com/YihaoAng/TSGBench) to work with some of our own generated data (missing data)
+- Get TSGBench (https://github.com/YihaoAng/TSGBench) to work with some of our own generated data (done)
 - Get the environment/containers runnning on the cluster (done)
-- Get at least one model working on the cluster (Nvidia driver issue)
+- Get at least one model working on the cluster (file error)
 - Extract real data curves
 - Upload data to the cluster
 - Revisit GenLive (done)
