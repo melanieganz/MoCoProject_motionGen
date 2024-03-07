@@ -8,7 +8,7 @@
 2024-03-04
 - Get TSGBench (https://github.com/YihaoAng/TSGBench) to work with some of our own generated data (missing data)
 - Get the environment/containers runnning on the cluster (done)
-- Get at least one model working on the cluster (OSError: Read-only file)
+- Get at least one model working on the cluster (Nvidia driver issue)
 - Extract real data curves
 - Upload data to the cluster
 - Revisit GenLive (done)
