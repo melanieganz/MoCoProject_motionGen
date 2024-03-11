@@ -20,7 +20,7 @@
 - models not working yet - RGAN, TSGM -> drop TSGM for now since there seem to be some misunderstandings wrt the TSGMBench article and what they reference
 - fix the issue of per participants sample length (different lenghts of restfMRI scans), either per batch or make a global decision
 - look at participant data, make histogram of sequence length
-- choose anothermixed-type model besides TSGM, look around
-- set up Github with code properly following instructions from Mel
+- choose another mixed-type model besides TSGM, look around
+- set up Github with code properly following instructions from Mel (done)
 - Upload anonymized data to the cluster using randomly generated subject ids, time series, age and gender 
 
