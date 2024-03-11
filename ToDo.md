@@ -18,8 +18,8 @@
 - actually make plots with metrics work based on pkl file of simulated and real data
 - models working - TimeGAN, TimeVAE - evaluate those two with simulated and real data with plots above
 - models not working yet - RGAN, TSGM -> drop TSGM for now since there seem to be some misunderstandings wrt the TSGMBench article and what they reference
-- fix the issue of per participants sample length (different lenghts of restfMRI scans), either per batch or make a global decision
-- look at participant data, make histogram of sequence length
+- fix the issue of per participants sample length (different lenghts of restfMRI scans), either per batch or make a global decision (done)
+- look at participant data, make histogram of sequence length (done)
 - choose another mixed-type model besides TSGM, look around
 - set up Github with code properly following instructions from Mel (done)
 - Upload anonymized data to the cluster using randomly generated subject ids, time series, age and gender 
