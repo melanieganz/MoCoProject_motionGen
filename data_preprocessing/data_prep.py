@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
 
 
 """
@@ -51,9 +52,10 @@ def load_bar(counter, count_to, count_every):
         print(f'{counter + 1}/{count_to}', end='\r', flush=True)
 
 def create_data_arrays(subj_desc):
-    # create data array and histogram array
+    # create data array, histogram array and information array
     data_array = []
     hist_array = []
+    info_array = []
 
     # iterate over all subjects
     for i,subj in enumerate(subj_desc['participant_id']):
@@ -75,14 +77,22 @@ def create_data_arrays(subj_desc):
                 frames = len(data)
                 hist_array.append(frames)
                 
-                # skip runs with less than 380 frames, truncate runs with more than 380 frames
+                # skip runs with less than 380 frames, truncate and store information of runs with more than 380 frames
                 if frames < 380:
                     continue
                 data_array.append(data[:380])
+                row = subj_desc[subj_desc['participant_id'] == subj]
+                age = row['age'].iloc[0]
+                sex = row['sex'].iloc[0]
+                info_array.append([subj, age, sex])
     
     data_array = np.array(data_array)
+    hist_array = np.array(hist_array)
+    info_array = np.array(info_array)
     print('data_array shape:', data_array.shape)
-    return data_array, hist_array
+    print('hist_array shape:', hist_array.shape)
+    print('info_array shape:', info_array.shape)
+    return data_array, hist_array, info_array
 
 def plot_histogram(hist_array):
     # plot histogram
@@ -108,15 +118,28 @@ def plot_histogram(hist_array):
             print(unique, '\t', count)
     print()
     print('number of participants with less than 380 frames in run 1: ', len(np.where(np.array(hist_array) < 380)[0]))
-    print('number of participants with more than 379 frames in run 1:' , len(np.where(np.array(hist_array) > 379)[0]))
+    print('number of participants with more than 379 frames in run 1:' , len(np.where(np.array(hist_array) > 379)[0]), '\n')
 
 
+# load data, create data arrays, plot histogram and additional information
 desc = load_desc()
 subj = load_subj()
 subj_desc = filter_subj_desc(subj, desc)
-data_array, hist_array = create_data_arrays(subj_desc)
+data_array, hist_array, info_array = create_data_arrays(subj_desc)
 plot_histogram(hist_array)
 
-# save data as .npz files
-#np.savez('fmri_translations', data_array[:, 0:3])
-#np.savez('fmri_rotations'   , data_array[:, 3:6])
+# set random seed and split data and info in train, validation and test
+seed = np.random.seed(1)
+X_train, X_test , info_train, info_test  = train_test_split(data_array, info_array, test_size=0.2, random_state=seed)
+X_train, X_valid, info_train, info_valid = train_test_split(X_train,    info_train, test_size=0.2, random_state=seed)
+print('X_train shape:', X_train.shape)
+print('X_valid shape:', X_valid.shape)
+print('X_test shape: ', X_test.shape)
+print()
+print('info_train shape:', info_train.shape)
+print('info_valid shape:', info_valid.shape)
+print('info_test shape: ', info_test.shape)
+
+
+# todo:
+#  1) save necessary arrays
