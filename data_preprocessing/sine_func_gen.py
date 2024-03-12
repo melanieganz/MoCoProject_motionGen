@@ -17,9 +17,9 @@ def generate_multiple_sine_waves(num_samples, num_waves, frequency_range, amplit
     return waves
 
 # Number of sample points to generate
-sample_points = 100
+sample_points = 24
 # Number of waves per sample
-num_waves = 1
+num_waves = 6
 # Frequency range for generated sine waves
 frequency_range = (1.0, 5.0)
 # Amplitude range for generated sine waves

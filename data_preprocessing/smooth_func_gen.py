@@ -19,9 +19,9 @@ def generate_smooth_signal(num_samples, num_waves, gamma=1.0):
 # Number of samples to generate
 num_samples_to_generate = 10000
 # Number of sample points to generate
-sample_points = 100
+sample_points = 24
 # Number of waves per sample
-num_waves = 1
+num_waves = 6
 
 smooth_funcs = np.zeros((num_samples_to_generate, sample_points, num_waves))
 
