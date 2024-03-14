@@ -15,8 +15,8 @@
 - Create one-page abstract draft (ongoing)
 
 2024-03-11
-- actually make plots with metrics work based on pkl file of simulated and real data
-- models working - TimeGAN, TimeVAE - evaluate those two with simulated and real data with plots above
+- actually make plots with metrics work based on pkl file of simulated and real data (done: for sine waves)
+- models working - TimeGAN, TimeVAE - evaluate those two with simulated and real data with plots above (TimeVAE: done, TimeGAN: ongoing)
 - models not working yet - RGAN, TSGM -> drop TSGM for now since there seem to be some misunderstandings wrt the TSGMBench article and what they reference
 - fix the issue of per participants sample length (different lenghts of restfMRI scans), either per batch or make a global decision (done)
 - look at participant data, make histogram of sequence length (done)
