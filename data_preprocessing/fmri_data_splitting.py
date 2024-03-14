@@ -2,7 +2,6 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from utils import MinMaxScaler
 from sklearn.model_selection import train_test_split
 
 
@@ -20,8 +19,7 @@ EXPECTED DIR STRUCTURE
         - sub-..._motion.tsv
   - /sub-...
   - /sub-...
-- fmri_data_preprocessing.py 
-- utils.py
+- fmri_data_splitting.py 
 """
 
 def load_desc():
@@ -130,35 +128,19 @@ print('number of participants with less than 380 frames in run 1: ', len(np.wher
 print('number of participants with more than 379 frames in run 1:' , len(np.where(np.array(hist_array) > 379)[0]))
 print()
 
-
-# set random seed and split data and info in train, validation and test
+# set random seed and split data and info in train and test splits
 seed = np.random.seed(1)
 X_train, X_test , info_train, info_test  = train_test_split(data_array, info_array, test_size=0.2, random_state=seed)
-X_train, X_valid, info_train, info_valid = train_test_split(X_train,    info_train, test_size=0.2, random_state=seed)
 print('train data shape: {:>15}'.format(str(X_train.shape)))
-print('valid data shape: {:>15}'.format(str(X_valid.shape)))
 print(' test data shape: {:>15}'.format(str(X_test.shape )))
 print('train info shape: {:>15}'.format(str(info_train.shape)))
-print('valid info shape: {:>15}'.format(str(info_valid.shape)))
 print(' test info shape: {:>15}'.format(str(info_test.shape )))
 print()
 print('min and max before scaling')
 print('X_train: {: .9f}\t{: .9f}'.format(np.min(X_train), np.max(X_train)))
-print('X_valid: {: .9f}\t{: .9f}'.format(np.min(X_valid), np.max(X_valid)))
 print('X_test:  {: .9f}\t{: .9f}'.format(np.min(X_test) , np.max(X_test)))
 print()
 
-# scale data
-scaler  = MinMaxScaler()        
-X_train = scaler.fit_transform(X_train)
-X_valid = scaler.transform(X_valid)
-X_test  = scaler.transform(X_test)
-print('min and max after scaling')
-print('X_train: {: .9f}\t{: .9f}'.format(np.min(X_train), np.max(X_train)))
-print('X_valid: {: .9f}\t{: .9f}'.format(np.min(X_valid), np.max(X_valid)))
-print('X_test:  {: .9f}\t{: .9f}'.format(np.min(X_test) , np.max(X_test)))
-
 # save each split
 np.savez('fmri_train.npz', X_train)
-np.savez('fmri_valid.npz', X_valid)
 np.savez('frmi_test.npz' , X_test )
