@@ -8,7 +8,7 @@ EXPECTED DIR STRUCTURE
 /main
 - custom_sines.npz
 - custom_smooths.npz
-- custom_data_preprocessing.py 
+- custom_data_splitting.py 
 """
 
 # should be either 'sines' or 'smooths'
