@@ -9,7 +9,7 @@
 - Get TSGBench (https://github.com/YihaoAng/TSGBench) to work with some of our own generated data (done)
 - Get the environment/containers runnning on the cluster (done)
 - Get at least one model working on the cluster (done)
-- Extract real data curves
+- Extract real data curves (done)
 - Upload data to the cluster 
 - Revisit GenLive (done)
 - Create one-page abstract draft (ongoing)
