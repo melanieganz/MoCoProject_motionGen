@@ -58,7 +58,7 @@ sine_wave_samples = np.zeros((num_samples_to_generate, sample_points, num_waves)
 for i in range(num_samples_to_generate):
     sine_wave_samples[i] = generate_correlated_sine_waves(sample_points, num_waves, frequency_range, amplitude_range)
 
-#np.savez('custom_sines.npz', data=sine_wave_samples)
+np.savez('custom_sines.npz', data=sine_wave_samples)
 
 # Plot the first sample from the array
 plt.figure(figsize=(12, 8))
