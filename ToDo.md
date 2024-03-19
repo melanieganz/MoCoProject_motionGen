@@ -24,3 +24,9 @@
 - set up Github with code properly following instructions from Mel (done)
 - Upload anonymized data to the cluster using randomly generated subject ids, time series, age and gender 
 
+2024-03-18
+- Finilize the TimeGAN and TimeVAE pipeline.
+- Focus on report writting:
+    - complete the Introduction section;
+    - extract relevant information from the POCS and put it into the Background and Methods sections;
+    - write a sub-chapter on code reproducability.
