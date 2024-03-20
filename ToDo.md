@@ -25,6 +25,7 @@
 - Upload anonymized data to the cluster using randomly generated subject ids, time series, age and gender 
 
 2024-03-18
+- Generate correlated sine waves. (done: two different methods)
 - Finilize the TimeGAN and TimeVAE pipeline.
 - Focus on report writting:
     - complete the Introduction section;
