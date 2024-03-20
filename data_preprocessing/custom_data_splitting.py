@@ -14,7 +14,7 @@ EXPECTED DIR STRUCTURE
 # should be either 'sines' or 'smooths'
 dataset = 'sines'
 # dataset descriptor: we can have 1 wave per time-series (1w) or six waves (6w)
-dataset_state = '1w'
+dataset_state = '6w'
 
 # load data
 data = np.load('custom_' + dataset + '_' + dataset_state + '.npz')
