@@ -28,7 +28,7 @@
 - Generate correlated sine waves. (done: two different methods)
 - Finalize the TimeGAN and TimeVAE pipeline.
 - Focus on report writting:
-    - complete the Introduction section.
+    - complete the Introduction section. (done)
     - extract relevant information from the POCS and put it into the Background and Methods sections.
         - includes generation of data, algorithms and data descriptions (sines and fmri) 
     - write a sub-chapter on code reproducability.
