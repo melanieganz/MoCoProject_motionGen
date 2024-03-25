@@ -31,5 +31,5 @@
     - complete the Introduction section. (done)
     - extract relevant information from the POCS and put it into the Background and Methods sections.
         - includes generation of data, algorithms and data descriptions (sines and fmri) 
-    - write a sub-chapter on code reproducability.
+    - write a sub-chapter on code reproducability. (done)
     - include plots of sine data (done) and fmri data
