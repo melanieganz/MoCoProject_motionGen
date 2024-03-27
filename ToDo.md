@@ -33,3 +33,6 @@
         - includes generation of data, algorithms and data descriptions (sines and fmri) (done: sines)
     - write a sub-chapter on code reproducability. (done)
     - include plots of sine data (done) and fmri data
+
+- Extras:
+    - We have implemented a hyper-parameter search for TimeVAE. (TimeGAN: ongoing)
