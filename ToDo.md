@@ -35,4 +35,5 @@
     - include plots of sine data (done) and fmri data
 
 - Extras:
-    - We have implemented a hyper-parameter search for TimeVAE. (TimeGAN: ongoing)
+    - We have implemented a hyper-parameter search for TimeVAE and TimeGAN.
+    - Fourier-flows. (ongoing)
