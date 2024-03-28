@@ -26,14 +26,15 @@
 
 2024-03-18
 - Generate correlated sine waves. (done: two different methods)
-- Finalize the TimeGAN and TimeVAE (done) pipeline.
+- Finalize the TimeGAN and TimeVAE pipeline. (done)
 - Focus on report writting:
     - complete the Introduction section. (done)
     - extract relevant information from the POCS and put it into the Background and Methods sections.
         - includes generation of data, algorithms and data descriptions (sines and fmri) (done: sines)
     - write a sub-chapter on code reproducability. (done)
     - include plots of sine data (done) and fmri data
-
 - Extras:
     - We have implemented a hyper-parameter search for TimeVAE and TimeGAN.
-    - Fourier-flows. (ongoing)
+    - TimeGAN can now generate a distribution the size of the testing set (it was previously fixed to the training set's size).
+    - RGAN is running locally, but it has GPU/CUDA-related issues on the cluster.
+    - Fourier-flows. (trains properly, but cannot sample during evaluation)
