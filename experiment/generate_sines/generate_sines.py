@@ -30,8 +30,8 @@ for gen, title in zip(generators, titles):
 		)
 
 	# Original
-	if titles == "utils.timegan_gen":
-		utils.jakob_gen(
+	if titles == "timegan_gen":
+		utils.timegan_gen(
 			n_samples=args.n_samples,
 			x=None,
 			freq_range=args.seq_len,
@@ -43,8 +43,8 @@ for gen, title in zip(generators, titles):
 
 	x = np.linspace(0, 2*np.pi, args.seq_len)
 
-	if titles == "utils.timegan_gen_1":
-		utils.jakob_gen(
+	if titles == "timegan_gen_1":
+		utils.timegan_gen(
 			n_samples=args.n_samples,
 			x=x,
 			freq_range=args.seq_len,
@@ -54,8 +54,8 @@ for gen, title in zip(generators, titles):
 			phase_range=args.phase_range
 		)
 
-	if titles == "utils.timegan_gen_2":
-		utils.jakob_gen(
+	if titles == "timegan_gen_2":
+		utils.timegan_gen(
 			n_samples=args.n_samples,
 			x=x,
 			freq_range=args.seq_len,
