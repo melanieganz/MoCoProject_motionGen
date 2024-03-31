@@ -14,7 +14,7 @@ parser.add_argument('--phase_range', nargs='+', type=float)
 args = parser.parse_args()
 
 # run experiment
-titles = ['jakob_gen', 'timegan_gen', 'timegan_gen_1', 'timegan_gen_2']
+titles = ['jakob_gen', 'timegan_gen', 'timegan_gen_1', 'timegan_gen_2', 'timegan_gen_3']
 
 for gen, title in zip(generators, titles):
 
@@ -38,7 +38,8 @@ for gen, title in zip(generators, titles):
 			dim=args.dim,
 			freq_range=args.freq_range,
 			amp_range=None,
-			phase_range=args.phase_range
+			phase_range=args.phase_range,
+			do_normalize=True,
 		)
 
 	x = np.linspace(0, 2*np.pi, args.seq_len)
@@ -51,7 +52,9 @@ for gen, title in zip(generators, titles):
 			dim=args.dim,
 			freq_range=args.freq_range,
 			amp_range=None,
-			phase_range=args.phase_range
+			phase_range=args.phase_range,
+			do_scale=True,
+			do_normalize=False,
 		)
 
 	if titles == "timegan_gen_2":
@@ -62,7 +65,22 @@ for gen, title in zip(generators, titles):
 			dim=args.dim,
 			freq_range=args.freq_range,
 			amp_range=args.amp_range,
-			phase_range=args.phase_range
+			phase_range=args.phase_range,
+			do_scale=True,
+			do_normalize=False,
+		)
+
+	if titles == "timegan_gen_2":
+		utils.timegan_gen(
+			n_samples=args.n_samples,
+			x=x,
+			freq_range=args.seq_len,
+			dim=args.dim,
+			freq_range=args.freq_range,
+			amp_range=args.amp_range,
+			phase_range=args.phase_range,
+			do_scale=False,
+			do_normalize=True,
 		)
 
     X_train, X_test = train_test_split(X, train_size=0.8, random_state=1)

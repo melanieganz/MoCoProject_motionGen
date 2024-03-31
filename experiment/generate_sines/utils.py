@@ -36,7 +36,9 @@ def timegan_gen(
         seq_len=24,
         dim=6, freq_range=(1.0, 5.0),
         amp_range=None,
-        phase_range=(-np.pi, np.pi)
+        phase_range=(-np.pi, np.pi),
+        do_scale=True,
+        do_normalize=False,
     ):
 
     data = list()
@@ -62,8 +64,15 @@ def timegan_gen(
             temp.append(temp_data)
 
         temp = np.transpose(np.asarray(temp))
-        temp = (temp + 1)*0.5
+        if do_scale:
+            temp = (temp + 1)*0.5
+        if do_normalize:
+            temp_flat = temp.flatten()
+            temp_min = temp_flat.min()
+            temp_max = temp_flat.max()
+            temp = (temp - temp_min) / (temp_min - temp_max)
         data.append(temp)
+
     return data    
 
 
