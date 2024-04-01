@@ -36,4 +36,4 @@
 - Extras:
     - We have implemented a hyper-parameter search for RGAN, TimeGAN, and TimeVAE.
     - RGAN is running on the cluster (sines).
-    - Fourier-flows is running locally (sines); currently waiting for resources on the cluster.
+    - Fourier-flows is running on the cluster (sines).
