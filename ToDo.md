@@ -34,6 +34,6 @@
     - write a sub-chapter on code reproducability. (done)
     - include plots of sine data (done) and fmri data
 - Extras:
-    - We have implemented a hyper-parameter search for RGAN, TimeGAN, and TimeVAE.
+    - We have implemented a hyper-parameter search for RGAN, TimeGAN, TimeVAE, and Fourier-flows.
     - RGAN is running on the cluster (sines).
     - Fourier-flows is running on the cluster (sines).
