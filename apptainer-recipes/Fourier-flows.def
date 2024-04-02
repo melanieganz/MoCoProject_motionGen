@@ -32,7 +32,8 @@ From: debian:buster-slim
         scikit-learn==0.24.2 \
         scipy==1.5.2 \
         seaborn==0.11.2 \
-        tensorflow==1.15.5
+        tensorflow-gpu==1.15.5 \
+        protobuf==3.20.0
 
 %environment
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
