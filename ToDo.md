@@ -39,9 +39,9 @@
     - Fourier-flows is running on the cluster (sines).
  
 2024-04-02
-- according to POCS feedback, remove unrealistic outliers from training data, use mean +-2 stds only
-- convert degrees/radians to mm by assuming a 10 cm diameter aka 50 mm radius sphere, see POCS
-- start hyper paramater search first on model specific parameters and then on classical dl paramters, evaluation criteria for good performance is TSGBench - area of spiderweb?
-- address melanie's comments to the thesis writing and add images
-- melanie will add POCS to GitHub repo
-- melanie will find info for CFID
+- According to the POCS feedback, remove unrealistic outliers from training data, use mean +-2 stds only.
+- Convert degrees/radians to mm by assuming a 10 cm diameter aka 50 mm radius sphere, see POCS.
+- Start hyper paramater search first on model specific parameters and then on classical dl paramters, evaluation criteria for good performance is TSGBench - area of spiderweb?
+- Address Melanie's comments to the thesis writing and add images. (thesis writting: done, images: ongoing)
+- Melanie will add POCS to GitHub repo.
+- Melanie will find info for CFID.
