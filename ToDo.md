@@ -41,7 +41,9 @@
 2024-04-02
 - According to the POCS feedback, remove unrealistic outliers from training data, use mean +-2 stds only. (done)
 - Convert degrees/radians to mm by assuming a 10 cm diameter aka 50 mm radius sphere, see POCS. (done)
-- Start hyper paramater search first on model specific parameters and then on classical dl paramters, evaluation criteria for good performance is TSGBench - area of spiderweb?
+- Start hyper paramater search first on model specific parameters and then on classical dl paramters, evaluation criteria for good performance is TSGBench - area of spiderweb? (done)
 - Address Melanie's comments to the thesis writing and add images. (thesis writting: done, images: ongoing)
 - Melanie will add POCS to GitHub repo.
 - Melanie will find info for CFID.
+
+Evaluation for the first stage of the grid search is based on visual examination of the t-SNE plots and the KL Divergence. We have modified TimeGAN's visualization to add such functionality to TimeVAE and Fourier-flows.
