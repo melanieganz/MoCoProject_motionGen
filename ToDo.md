@@ -50,7 +50,7 @@ Evaluation for the first stage of the grid search is based on visual examination
 2024-04-08
 - Melanie will find info for CFID.
 - finish discussion of evaluation metrics in the report
-- add two models to report Time VAE, FourirerFlow to report
+- add two models to report TimeVAE (done), RGAN (done), TimeGAN (ongoing) FourirerFlow to report
 - stop grid search for TimeGan in stage 1, continue with stage 2 for the others
 - regenerate t-sne plots, 10 times 1000 points randomly sampeld with replacement
 - add figures genereated last week to report
