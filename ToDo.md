@@ -56,4 +56,13 @@ Evaluation for the first stage of the grid search is based on visual examination
 - add figures genereated last week to report
 - add stage figures to report as well
 
+2024-04-22
+- Sine experiments are ran locally for RGAN, TimeGAN, TimeVAE, and Fourier Flow on 10,000 samples of:
+    - single sine wave with 24 sampling points;
+    - six correlated sine waves with 24 sampling points;
+- TimeVAE and Fourier Flow are evaluated on 10,000 samples of six correlated sine waves with 380 sampling points.
+- RGAN was evaluated on 10,000 samples of a smooth function with 72 sampling points (TimeGAN: ongoing).
+- Grid search and first stage of evaluation for Fourier Flow are done, currently training the final 9 models (7/9).
+- Extended the Methods & Results section to reflect our sine experiments, the Discussion section includes some of the talking points.  
+
 
