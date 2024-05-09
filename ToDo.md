@@ -66,9 +66,9 @@ Evaluation for the first stage of the grid search is based on visual examination
 - Extended the Methods & Results section to reflect our sine experiments, the Discussion section includes some of the talking points.
 
 2024-05-06
-- Merge Jakob's and Hristo's discussion points.
-- Prodice and add mean PS for RGAN and TimeGAN.
-- Finish captioning the figures and tables (by 10th of May).
-- Finish the fMRI Results section (by 12th of May).
+- Merge Jakob's and Hristo's discussion points. (done)
+- Produce and add mean PS for RGAN and TimeGAN.
+- Finish captioning the figures and tables (by 10th of May). (done)
+- Finish the fMRI Results section (by 12th of May). (done)
 - Start the fMRI Discussion and (potentially) finish it (by 12th of May).
 
