@@ -48,7 +48,7 @@
 Evaluation for the first stage of the grid search is based on visual examination of the t-SNE plots and the KL Divergence. We have modified TimeGAN's visualization to add such functionality to TimeVAE and Fourier-flows.
 
 2024-04-08
-- Melanie will find info for CFID.
+- Melanie will find info for CFID. 
 - finish discussion of evaluation metrics in the report
 - add two models to report TimeVAE (done), RGAN (done), TimeGAN (ongoing) FourirerFlow to report
 - stop grid search for TimeGan in stage 1, continue with stage 2 for the others (training protocol was updated according to Vincent's suggestions)
@@ -67,7 +67,7 @@ Evaluation for the first stage of the grid search is based on visual examination
 
 2024-05-06
 - Merge Jakob's and Hristo's discussion points. (done)
-- Produce and add mean power spectrum for RGAN and TimeGAN.
+- Produce and add mean power spectrum for TimeVAE and Fourier Flow. (done) 
 - Finish captioning the figures and tables (by 10th of May). (done)
 - Finish the fMRI Results section (by 12th of May). (done)
 - Start the fMRI Discussion and (potentially) finish it (by 12th of May).
