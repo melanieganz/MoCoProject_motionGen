@@ -6,3 +6,5 @@ custom_data_splitting.py    creates train/test split of custom sine waves or cus
 fmri_data_splitting.py      creates train/test split of resting-state fmri data. 
                             creates a histogram and prints additional information.
                             include 'descriptions' and 'fmri' dirs + corresponding content in order to run fmri_data_splitting.py 
+
+We have extensively used ChatGPT to generate code templates and comments to speed up our work.
