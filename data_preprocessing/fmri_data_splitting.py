@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.ticker import PercentFormatter, MultipleLocator
 from sklearn.model_selection import train_test_split
 
 
@@ -40,6 +41,8 @@ def filter_subj_desc(subj, desc):
     subj_desc = subj_desc[subj_desc['participant_id'] != 'sub-NDARINV66PM75JX'] 
     subj_desc = subj_desc[subj_desc['age'] != 888] 
     subj_desc['age'] = subj_desc['age'] // 12
+    subj_desc = subj_desc[subj_desc['age'].isin([9, 10])]
+    subj_desc = subj_desc[subj_desc['sex'].isin([1,  2])]
     return subj_desc
 
 def load_bar(counter, count_to, count_every):
@@ -86,6 +89,11 @@ def create_data_arrays(subj_desc):
     data_array = np.array(data_array)
     hist_array = np.array(hist_array)
     info_array = np.array(info_array)
+
+    # convert degrees to millimeters
+    data_array[:, :, 3:] = 50 * np.deg2rad(data_array[:, :, 3:])
+    print("shape:", data_array.shape)
+
     return data_array, hist_array, info_array
 
 def plot_histogram(hist_array):
@@ -101,6 +109,94 @@ def plot_histogram(hist_array):
     plt.ylabel('number of participants (log scale)')
     plt.show()
 
+def remove_outliers(data_array, info_array, percentile):
+    rows, _, dims = data_array.shape
+
+    # find maximum displacement values
+    max_disp = []
+    for i in range(rows):
+        temp = []
+        for d in range(dims):
+            if abs(min(data_array[i, :, d])) > abs(max(data_array[i, :, d])):
+                temp.append(min(data_array[i, :, d]))
+            else:
+                temp.append(max(data_array[i, :, d]))
+        max_disp.append(temp)
+    max_disp = np.array(max_disp)
+
+    # compute boxplot with whiskers
+    bp = plt.boxplot([max_disp[:, d] for d in range(dims)], whis=percentile)
+    plt.close()
+
+    # extract whiskers
+    whiskers = [item.get_ydata()[1] for item in bp['whiskers']] 
+    
+    # remove outliers
+    new_data = []
+    new_info = []
+    for i in range(rows):
+        temp_data = []
+        temp_info = []
+        keep = True
+        for d in range(dims):
+            # extract lower and upper whisker per dimension
+            low_whisk, high_whisk = whiskers[d*2:(d+1)*2]
+            if not (any(data_array[i, :, d] < low_whisk) or any(data_array[i, :, d] > high_whisk)):
+                # only keep data that is between the whiskers
+                temp_data.append(data_array[i, :, d])
+                temp_info.append(info_array[i])
+            else:
+                keep = False
+        if keep:
+            new_data.append(temp_data)
+            new_info.append(temp_info)
+
+    # convert to numpy arrays and fix shape
+    new_data = np.array(new_data).transpose(0, 2, 1)
+    new_info = np.array(new_info).transpose(0, 2, 1)
+
+    return new_data, new_info
+
+def violinplot(data_array, labels):
+    rows, _, dims = data_array.shape
+
+    # Find maximum displacement values
+    max_disp = []
+    for i in range(rows):
+        temp = []
+        for d in range(dims):
+            if abs(min(data_array[i, :, d])) > abs(max(data_array[i, :, d])):
+                temp.append(min(data_array[i, :, d]))
+            else:
+                temp.append(max(data_array[i, :, d]))
+        max_disp.append(temp)
+    max_disp = np.array(max_disp)
+
+    # Compute violinplot
+    vp = plt.violinplot([max_disp[:, d] for d in range(dims)],
+                        vert=True,
+                        widths=0.5,
+                        showmedians=True,
+                        showmeans=True,
+                        showextrema=True)
+    
+    # Set colors for violinplot
+    for patch in vp['bodies']:
+        patch.set_edgecolor('black')
+    for partname in ('cbars', 'cmins', 'cmaxes', 'cmeans'):
+        vp[partname].set_edgecolor('black')
+        vp[partname].set_linewidth(1)
+    vp['cmedians'].set_edgecolor('red')
+    vp['cmedians'].set_linewidth(1)
+    
+    plt.ylabel('Millimeters [mm]', fontsize=11, weight='bold')
+    plt.xticks(np.arange(1, dims + 1), labels, weight='bold')
+    plt.yticks(weight='bold')
+    plt.grid()
+    plt.tight_layout()
+    plt.show()
+
+
 
 # load data and create data arrays
 desc = load_desc()
@@ -115,6 +211,23 @@ print('info_array shape: {:>15}'.format(str(info_array.shape)))
 print('hist_array shape: {:>15}'.format(str(hist_array.shape)))
 print()
 
+# needed for violin plots and printouts
+categories = ['trans-X', 'trans-Y', 'trans-Z', 'rot-X', 'rot-Y', 'rot-Z']
+
+# violin plot before outlier removal
+violinplot(data_array[:, :, :], labels=categories)
+for d in range(6):
+    print(categories[d] + ': {:3.2f}\t{:3.2f}'.format(np.min(data_array[:, :, d]), np.max(data_array[:, :, d])))
+
+# remove outliers
+data_array, info_array = remove_outliers(data_array, info_array, percentile=(2.5, 97.5))
+rows, cols, dims = data_array.shape
+
+# violin plot after outlier removal
+violinplot(data_array[:, :, :], labels=categories)
+for d in range(6):
+    print(categories[d] + ': {:3.2f}\t{:3.2f}'.format(np.min(data_array[:, :, d]), np.max(data_array[:, :, d])))
+
 # plot histogram
 plot_histogram(hist_array)
 print('(10 or more occurences of same frame number)')
@@ -122,7 +235,7 @@ print('frames', '\t', '# participants')
 uniques = np.unique(hist_array)
 for unique in uniques:
     count = len(np.where(hist_array == unique)[0])
-    if count >= 10:
+    if count >= 1:
         print(unique, '\t', count)
 print('number of participants with less than 380 frames in run 1: ', len(np.where(np.array(hist_array) < 380)[0]))
 print('number of participants with more than 379 frames in run 1:' , len(np.where(np.array(hist_array) > 379)[0]))
@@ -131,16 +244,38 @@ print()
 # set random seed and split data and info in train and test splits
 seed = np.random.seed(1)
 X_train, X_test , info_train, info_test  = train_test_split(data_array, info_array, test_size=0.2, random_state=seed)
+X_train, X_valid , info_train, info_valid  = train_test_split(X_train, info_train, test_size=0.1, random_state=seed)
 print('train data shape: {:>15}'.format(str(X_train.shape)))
+print('valid data shape: {:>15}'.format(str(X_valid.shape)))
 print(' test data shape: {:>15}'.format(str(X_test.shape )))
 print('train info shape: {:>15}'.format(str(info_train.shape)))
+print('valid info shape: {:>15}'.format(str(info_valid.shape)))
 print(' test info shape: {:>15}'.format(str(info_test.shape )))
 print()
-print('min and max before scaling')
+print('min and max values')
 print('X_train: {: .9f}\t{: .9f}'.format(np.min(X_train), np.max(X_train)))
+print('X_valid: {: .9f}\t{: .9f}'.format(np.min(X_valid), np.max(X_valid)))
 print('X_test:  {: .9f}\t{: .9f}'.format(np.min(X_test) , np.max(X_test)))
 print()
 
-# save each split
-np.savez('fmri_train.npz', X_train)
-np.savez('frmi_test.npz' , X_test )
+# maximum and minimum values per curve per dataset
+print('X_TRAIN')
+for d in range(dims):
+    print(categories[d] + ': {:3.9f}\t{:3.9f}'.format(np.min(X_train[:, :, d]), np.max(X_train[:, :, d])))
+print()
+print('X_VALID')
+for d in range(dims):
+    print(categories[d] + ': {:3.9f}\t{:3.9f}'.format(np.min(X_valid[:, :, d]), np.max(X_valid[:, :, d])))
+print()
+print('X_TEST')
+for d in range(dims):
+    print(categories[d] + ': {:3.9f}\t{:3.9f}'.format(np.min(X_test[:, :, d]), np.max(X_test[:, :, d])))
+
+# set to True to save each split
+if False:
+    np.savez('fmri_train_new.npz', X_train)
+    np.savez('info_train_new.npz', info_train)
+    np.savez('fmri_valid_new.npz', X_valid)
+    np.savez('info_valid_new.npz', info_valid)
+    np.savez('fmri_test_new.npz' , X_test)
+    np.savez('info_test_new.npz' , info_test)
